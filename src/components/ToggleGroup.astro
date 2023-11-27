@@ -1,5 +1,11 @@
 ---
+type Props = {
+  options: string[];
+};
 
+const { options } = Astro.props;
 ---
 
-<div></div>
+<div class="bg-red-500">
+  {options.map((i) => <span>{i}</span>)}
+</div>
