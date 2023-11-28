@@ -33,6 +33,17 @@ const button = cva("button", {
 });
 ---
 
-<button class={cn(button({ intent, size }), propClass)}>
+<button
+  class="radial-gradient py-2 rounded-full border border-violet-500 text-white w-full"
+>
   <slot />
 </button>
+<style>
+  .radial-gradient {
+    background: radial-gradient(
+      circle at 23% 140%,
+      rgb(235 113 215) 0%,
+      rgb(110 41 242) 55%
+    );
+  }
+</style>

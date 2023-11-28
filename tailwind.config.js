@@ -11,6 +11,7 @@ export default {
             foregorund: 'rgba(var(--muted-foreground), <alpha-value>)',
           },
           gray: 'rgba(var(--gray), <alpha-value>)',
+          border: 'rgba(var(--border), <alpha-value>)',
         }
     },
   },
