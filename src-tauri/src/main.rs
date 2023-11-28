@@ -1,13 +1,14 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use tauri::Manager;
+use tauri::{Manager, Size};
 
 fn main() {
     tauri::Builder::default()
         .setup(|app| {
             let window = app.get_window("main").unwrap();
             window.set_always_on_top(true)?;
+            window.set_resizable(false)?;
             Ok(())
         })
         .run(tauri::generate_context!())
