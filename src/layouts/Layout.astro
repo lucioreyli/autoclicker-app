@@ -11,19 +11,18 @@ import "../style/index.css";
     <meta name="generator" content={Astro.generator} />
     <link
       rel="preload"
-      href="/fonts/atkinson-regular.woff"
+      href="/fonts/NotoSansNagMundari-Regular.ttf"
       as="font"
-      type="font/woff"
+      type="font/ttf"
       crossorigin
     />
     <link
       rel="preload"
-      href="/fonts/atkinson-bold.woff"
+      href="/fonts/NotoSansNagMundari-Bold.ttf"
       as="font"
-      type="font/woff"
+      type="font/ttf"
       crossorigin
     />
-    <link rel="stylesheet" href="/styles/fonts.css" />
   </head>
   <body>
     <slot />
@@ -44,21 +43,21 @@ import "../style/index.css";
     --border: 35, 34, 36;
   }
   @font-face {
-    font-family: "Atkinson";
-    src: url("/fonts/atkinson-regular.woff") format("woff");
+    font-family: "NotoSans";
+    src: url("/fonts/NotoSansNagMundari-Regular.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
-    font-family: "Atkinson";
-    src: url("/fonts/atkinson-bold.woff") format("woff");
+    font-family: "NotoSans";
+    src: url("/fonts/NotoSansNagMundari-Bold.ttf") format("truetype");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
   }
   html,
   body {
-    font-family: "Atkinson", sans-serif;
+    font-family: "NotoSans", sans-serif;
   }
 </style>

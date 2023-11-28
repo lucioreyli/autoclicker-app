@@ -1,12 +1,14 @@
 ---
-type Props = {
-  options: string[];
-};
+export type Props = { options: string[] };
 
 const { options } = Astro.props;
 ---
 
-<label class="bg-gray border border-border rounded-full flex" for="click-type">
+<label
+  class="bg-gray border border-zinc-600 rounded-full flex p-1 w-fit"
+  shadow-purple-500
+  for="click-type"
+>
   <input
     type="checkbox"
     class="sr-only peer"
@@ -15,7 +17,13 @@ const { options } = Astro.props;
   />
   {
     options.map((i) => (
-      <span class="px-8 py-2 cursor-pointer pointer-events-auto odd:peer-checked:bg-red-500 even:peer-[:not(:checked)]:bg-red-500 rounded-full">
+      <span
+        class:list={[
+          "px-4 py-2 cursor-pointer pointer-events-auto rounded-full border border-transparent text-sm flex items-center text-center justify-center",
+          "even:peer-[:not(:checked)]:bg-neutral-600 even:peer-[:not(:checked)]:border-neutral-400",
+          "even: odd:peer-checked:bg-neutral-600 odd:peer-checked:border-neutral-400",
+        ]}
+      >
         {i}
       </span>
     ))

@@ -5,9 +5,19 @@ import ToggleGroup from "../components/ToggleGroup.astro";
 ---
 
 <Layout title="Home">
-  <main class="w-fit mx-auto bg-muted-gray border-gray border-x px-4">
-    <h1 class="text-red-400 text-xl">hi</h1>
+  <main
+    class="w-fit mx-auto bg-muted-gray border-gray border-x p-4 min-w-[300px] items-center h-screen flex flex-col space-y-4 gradient"
+  >
     <ToggleGroup options={["Single", "Multiple"]} />
     <Button>Start</Button>
   </main>
 </Layout>
+<style>
+  .gradient {
+    background: radial-gradient(
+      circle at 50% 0%,
+      rgb(84 60 147) 0%,
+      rgba(var(--muted-gray)) 50%
+    );
+  }
+</style>
