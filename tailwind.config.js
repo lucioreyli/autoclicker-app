@@ -12,7 +12,10 @@ export default {
           },
           gray: 'rgba(var(--gray), <alpha-value>)',
           border: 'rgba(var(--border), <alpha-value>)',
-        }
+      },
+      backgroundImage: {
+        'purple-gradient': 'radial-gradient(circle at 50% 0%, rgb(84 60 147) 0%, rgba(var(--muted-gray)) 50%)'
+      }
     },
   },
   plugins: [],
