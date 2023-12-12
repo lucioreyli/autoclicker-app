@@ -6,6 +6,7 @@ struct Status(Mutex<bool>);
 use std::sync::Mutex;
 use tauri::Manager;
 mod helpers;
+mod setup;
 
 #[tauri::command]
 fn is_started(state: tauri::State<Status>) -> bool {
@@ -23,6 +24,8 @@ fn main() {
     tauri::Builder::default()
         .setup(|app| {
             app.manage(Status(false.into()));
+
+            setup::setup_hotkey();
 
             // window config
             let window = app.get_window("main").unwrap();
