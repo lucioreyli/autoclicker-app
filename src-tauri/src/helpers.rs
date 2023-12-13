@@ -1,8 +1,12 @@
 use std::thread;
 
-pub fn create_thread() -> thread::JoinHandle<()> {
+use global_hotkey::GlobalHotKeyEvent;
+
+pub fn create_thread() -> Result<thread::JoinHandle<()>, &'static str> {
     let created_thread = thread::spawn(move || loop {
-        panic!("dale");
+        if let Ok(event) = GlobalHotKeyEvent::receiver().try_recv() {
+            println!("{:?}", event);
+        }
     });
-    created_thread
+    Ok(created_thread)
 }

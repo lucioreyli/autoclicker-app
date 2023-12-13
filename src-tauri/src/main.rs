@@ -3,6 +3,7 @@
 
 struct Status(Mutex<bool>);
 
+use helpers::create_thread;
 use std::sync::Mutex;
 use tauri::Manager;
 mod helpers;
@@ -21,16 +22,14 @@ fn toggle_state(state: tauri::State<Status>) -> bool {
 }
 
 fn main() {
+    setup::setup_hotkey();
     tauri::Builder::default()
         .setup(|app| {
             app.manage(Status(false.into()));
 
-            setup::setup_hotkey();
+            create_thread()?;
 
-            // window config
-            let window = app.get_window("main").unwrap();
-            window.set_always_on_top(false)?; // change to true on release
-            window.set_resizable(true)?; // change to false on release
+            setup::setup_window(app)?;
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![is_started, toggle_state])
