@@ -1,14 +1,4 @@
-use global_hotkey::{
-    hotkey::{Code, HotKey, Modifiers},
-    GlobalHotKeyManager,
-};
-use tauri::{App, Manager};
-
-pub fn setup_hotkey() {
-    let hotkey = HotKey::new(Some(Modifiers::SHIFT), Code::KeyD);
-    let manager = GlobalHotKeyManager::new().unwrap();
-    manager.register(hotkey).unwrap();
-}
+use tauri::{App, Manager, PhysicalSize, Size};
 
 pub fn setup_window(app: &mut App) -> Result<(), &'static str> {
     let window = app.get_window("main").unwrap();
@@ -17,6 +7,13 @@ pub fn setup_window(app: &mut App) -> Result<(), &'static str> {
     window.set_always_on_top(!always_on_top).unwrap();
 
     window.set_resizable(false).unwrap();
+
+    window
+        .set_size(Size::Physical(PhysicalSize {
+            width: 320,
+            height: 200,
+        }))
+        .unwrap();
 
     Ok(())
 }

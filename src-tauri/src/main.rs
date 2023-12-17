@@ -1,13 +1,20 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-struct Status(Mutex<bool>);
+use global_hotkey::{
+    hotkey::{Code, HotKey, Modifiers},
+    GlobalHotKeyManager,
+};
+use global_hotkey::{GlobalHotKeyEvent, HotKeyState};
 
-use helpers::create_thread;
-use std::sync::Mutex;
-use tauri::Manager;
+use std::{sync::Mutex, thread};
+use tauri::{Manager, State};
+
+use crate::helpers::Payload;
 mod helpers;
 mod setup;
+
+struct Status(Mutex<bool>);
 
 #[tauri::command]
 fn is_started(state: tauri::State<Status>) -> bool {
@@ -22,13 +29,24 @@ fn toggle_state(state: tauri::State<Status>) -> bool {
 }
 
 fn main() {
-    setup::setup_hotkey();
+    let hotkey = HotKey::new(Some(Modifiers::SHIFT | Modifiers::ALT), Code::KeyD);
+    let manager = GlobalHotKeyManager::new().unwrap();
+    manager.register(hotkey).unwrap();
+
     tauri::Builder::default()
         .setup(|app| {
             app.manage(Status(false.into()));
-
-            create_thread()?;
-
+            thread::spawn(move || loop {
+                let receiver = GlobalHotKeyEvent::receiver();
+                let event = receiver.try_recv();
+                if event.is_ok() {
+                    let event = event.unwrap();
+                    if event.state() == HotKeyState::Released {
+                        println!("enemies manda diss");
+                    }
+                }
+                helpers::sleep(1000);
+            });
             setup::setup_window(app)?;
             Ok(())
         })
