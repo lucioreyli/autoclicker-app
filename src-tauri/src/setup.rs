@@ -3,8 +3,8 @@ use tauri::{App, Manager, PhysicalSize, Size};
 pub fn setup_window(app: &mut App) {
     let window = app.get_window("main").unwrap();
 
-    let always_on_top = cfg!(debug_assertions);
-    window.set_always_on_top(!always_on_top).unwrap();
+    let is_development = cfg!(debug_assertions);
+    window.set_always_on_top(!is_development).unwrap();
 
     window.set_resizable(false).unwrap();
 
