@@ -1,6 +1,6 @@
 use tauri::{App, Manager, PhysicalSize, Size};
 
-pub fn setup_window(app: &mut App) -> Result<(), &'static str> {
+pub fn setup_window(app: &mut App) {
     let window = app.get_window("main").unwrap();
 
     let always_on_top = cfg!(debug_assertions);
@@ -14,6 +14,4 @@ pub fn setup_window(app: &mut App) -> Result<(), &'static str> {
             height: 200,
         }))
         .unwrap();
-
-    Ok(())
 }

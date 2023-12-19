@@ -1,4 +1,3 @@
-// Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use global_hotkey::{
@@ -8,9 +7,8 @@ use global_hotkey::{
 use global_hotkey::{GlobalHotKeyEvent, HotKeyState};
 
 use std::{sync::Mutex, thread};
-use tauri::{Manager, State};
+use tauri::Manager;
 
-use crate::helpers::Payload;
 mod helpers;
 mod setup;
 
@@ -47,7 +45,7 @@ fn main() {
                 }
                 helpers::sleep(1000);
             });
-            setup::setup_window(app)?;
+            setup::setup_window(app);
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![is_started, toggle_state])
