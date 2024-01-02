@@ -30,7 +30,6 @@ fn main() {
     let hotkey = HotKey::new(Some(Modifiers::SHIFT | Modifiers::ALT), Code::KeyD);
     let manager = GlobalHotKeyManager::new().unwrap();
     manager.register(hotkey).unwrap();
-
     tauri::Builder::default()
         .setup(|app| {
             app.manage(Status(false.into()));
